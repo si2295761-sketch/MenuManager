@@ -20,6 +20,11 @@ namespace SampleGame
         private bool _isGameOver;
         public bool IsGameOver { get { return _isGameOver; } }
 
+        [SerializeField]
+        private string nextLevelName;
+
+        [SerializeField]
+        private int nextLevelIndex;
 
         // initialize references
         private void Awake()
@@ -59,14 +64,51 @@ namespace SampleGame
             {
                 _isGameOver = true;
                 _goalEffect.PlayEffect();
-                SceneManager.LoadScene("Level1");
+                // LoadLevel(nextLevelName);
+                // LoadLevel(nextLevelIndex);
+                // ReloadLevel();
+                LoadNextLevel();
+            }
+        }
+        private void LoadLevel(string levelName)
+        {
+            if(Application.CanStreamedLevelBeLoaded(levelName))
+            {
+                SceneManager.LoadScene(levelName);
+            }else
+            {
+                Debug.LogWarning("GAMEMANAGER LoadLevel Error: invalid scene specified!");
             }
         }
 
-        // check for the end game condition on each frame
-        private void Update()
+        private void LoadLevel(int levelIndex)
         {
-            if (_objective != null & _objective.IsComplete)
+            if(levelIndex >= 0 && levelIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                SceneManager.LoadScene(levelIndex);
+            }else
+            {
+                Debug.LogWarning("GAMEMANAGER LoadLevel Error: invalid scene specified!");
+            }
+            
+        }
+
+        private void ReloadLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void LoadNextLevel()
+        {
+            int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) %
+                                SceneManager.sceneCountInBuildSettings;
+            LoadLevel(nextSceneIndex);
+        }
+
+        // check for the end game condition on each frame
+        public void Update()
+        {
+            if (_objective != null && _objective.IsComplete)
             {
                 EndLevel();
             }
