@@ -260,9 +260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dde84ed529bf4c4dae296b1c8aa35c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManagement.MenuManager
-  mainMenuPrefab: {fileID: 3780743485799578479, guid: 901158436368f9e4eb010ee69f89da4e, type: 3}
-  settingMenuPrefab: {fileID: 5943931157903756196, guid: a3c063b8272985f48ba26b8296b1eed5, type: 3}
-  creditsScreenPrefab: {fileID: 5974626714458834665, guid: ee0873b0d02f9f049bdfc1f8088370da, type: 3}
+  mainMenuPrefab: {fileID: 0}
+  settingMenuPrefab: {fileID: 0}
+  creditsScreenPrefab: {fileID: 0}
   _menuParent: {fileID: 0}
 --- !u!1 &1031754441
 GameObject:
